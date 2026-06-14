@@ -33,7 +33,7 @@ export default function SidebarClubChannels() {
         {/* Identidad del Club (Molécula extraída) */}
         <ClubIdentityHeader 
           clubName={club.name}
-          logoUrl={club.logo_url}
+          logoUrl={club.avatar_url}
           onlineCount={club.online_count}
           isDropdownOpen={isDropdownOpen}
           onToggleDropdown={() => setIsDropdownOpen(!isDropdownOpen)}

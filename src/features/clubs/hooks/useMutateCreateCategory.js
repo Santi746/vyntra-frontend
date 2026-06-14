@@ -41,7 +41,7 @@ export function useMutateCreateCategory(club_uuid) {
         name,
         is_private,
         channels: [],
-        order: (previousCategories?.length || 0) + 1,
+        sort_order: (previousCategories?.length || 0) + 1,
         status: "creating",
       };
 

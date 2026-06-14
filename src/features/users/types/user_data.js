@@ -10,7 +10,7 @@ export class User {
     first_name,
     last_name,
     username,
-    category_tag,
+    user_tag,
     avatar_url,
     banner_url,
     bio = "",
@@ -19,12 +19,13 @@ export class User {
     is_online = false,
     mutual_friends_count = 0,
     club_uuids = [],
+    category_tag = "",
   }) {
     this.uuid = uuid;
     this.first_name = first_name;
     this.last_name = last_name;
     this.username = username;
-    this.category_tag = category_tag;
+    this.user_tag = user_tag;
     this.avatar_url = avatar_url;
     this.banner_url = banner_url;
     this.bio = bio;
@@ -37,7 +38,7 @@ export class User {
     // Propiedades calculadas para asegurar compatibilidad con JSON planos y spreads
     this.display_name = `${first_name} ${last_name}`;
     this.handle = `@${username}${category_tag}`;
-    
+
     const months = [
       "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio",
       "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"

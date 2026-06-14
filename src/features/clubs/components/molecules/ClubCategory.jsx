@@ -6,14 +6,22 @@ import Link from "next/link";
 import ChevronIcon from "@/shared/components/ui/atoms/ChevronIcon";
 import { motion, AnimatePresence } from "framer-motion";
 import ClubChannel from "@/features/clubs/components/atoms/ClubChannel";
-import { Plus, Settings } from "lucide-react";
+import { Plus, Settings, Lock } from "lucide-react";
 import { useQueryString } from "@/shared/hooks/useQueryString";
 import { useCheckPermission } from "@/features/clubs/hooks/useCheckPermission";
 import { PERMISSIONS } from "@/shared/constants/permissions";
 
 /**
- * Categoría interactiva que contiene una lista de canales. Desplegable y animada.
  * @component ClubCategory
+ * @description Categoría interactiva que contiene una lista de canales. Desplegable y animada.
+ *              Muestra un icono de candado si la categoría es privada.
+ *
+ * @param {string}   uuid          UUID de la categoría
+ * @param {string}   name          Nombre de la categoría
+ * @param {Array}    channels      Canales pertenecientes a esta categoría
+ * @param {number}   i             Índice para animación escalonada
+ * @param {string}   club_uuid     UUID del club
+ * @param {boolean}  [is_private]  Si la categoría es privada
  */
 export default function ClubCategory({
   uuid,
@@ -21,7 +29,7 @@ export default function ClubCategory({
   channels,
   i,
   club_uuid,
-  is_private,
+  is_private = false,
 }) {
   const [isExpanded, setIsExpanded] = useState(true);
   const params = useParams();
@@ -63,6 +71,13 @@ export default function ClubCategory({
             <p className="text-forest-label text-xs font-bold tracking-wider uppercase">
               {name}
             </p>
+            {is_private && (
+              <Lock
+                size={11}
+                className="shrink-0 text-forest-muted-alt"
+                aria-label="Categoría privada"
+              />
+            )}
           </button>
 
           {/* Acciones flotantes (solo visibles en hover Y con permisos) */}
@@ -103,6 +118,7 @@ export default function ClubCategory({
                   category_uuid={uuid}
                   club_uuid={club_uuid}
                   active={params.channel_uuid === channel.uuid}
+                  is_private={Boolean(channel.is_private)}
                   i={i}
                 />
               ))}
@@ -113,3 +129,4 @@ export default function ClubCategory({
     </>
   );
 }
+

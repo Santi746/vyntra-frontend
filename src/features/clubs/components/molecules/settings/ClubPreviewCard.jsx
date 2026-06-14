@@ -9,7 +9,7 @@ import React from "react";
  * @param {Object} props - Propiedades del componente
  * @param {Object} props.club - Objeto con los datos del club
  * @param {string} [props.club.banner_url] - URL de la imagen del banner del club
- * @param {string} [props.club.logo_url] - URL de la imagen del logo del club
+ * @param {string} [props.club.avatar_url] - URL de la imagen del logo del club
  * @param {number} [props.club.online_count] - Número de miembros en línea
  * @param {number} [props.club.members_count] - Número total de miembros
  * @param {string} props.name - El nombre a mostrar del club (a menudo reactivo a cambios en inputs)
@@ -36,8 +36,8 @@ export default function ClubPreviewCard({ club, name }) {
         
         <div className="px-4 relative">
           <div className="absolute -top-6 left-4 h-12 w-12 rounded-xl bg-forest-stat border-2 border-forest-card overflow-hidden">
-            {club?.logo_url && (
-              <img src={club.logo_url} alt="Logo" className="w-full h-full object-cover" />
+            {club?.avatar_url && (
+              <img src={club.avatar_url} alt="Logo" className="w-full h-full object-cover" />
             )}
           </div>
           

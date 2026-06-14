@@ -8,18 +8,18 @@ import { User } from "../types/user_data";
 
 /* Usuarios Mock (Amigos del usuario maestro) */
 export const FRIENDS_LIST = [
-    new User({ uuid: "usr_rel_4521", first_name: "María", last_name: "García", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria", category_tag: "#4521", username: "maria_g", club_uuids: ["club_001", "club_004"] }),
-    new User({ uuid: "usr_rel_8834", first_name: "Juan", last_name: "Pérez", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Juan", category_tag: "#8834", username: "juan_p", club_uuids: ["club_002", "club_009"] }),
-    new User({ uuid: "usr_rel_1190", first_name: "Ana", last_name: "Torres", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ana", category_tag: "#1190", username: "ana_t", club_uuids: ["club_003", "club_014"] }),
-    new User({ uuid: "usr_rel_6673", first_name: "Carlos", last_name: "López", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos", category_tag: "#6673", username: "carlos_l", club_uuids: ["club_001", "club_006"] }),
-    new User({ uuid: "usr_rel_2201", first_name: "Pedro", last_name: "Ruiz", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro", category_tag: "#2201", username: "pedro_r", club_uuids: ["club_002", "club_010"] }),
-    new User({ uuid: "usr_rel_9910", first_name: "Laura", last_name: "Díaz", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Laura", category_tag: "#9910", username: "laura_d", club_uuids: ["club_003", "club_005"] }),
-    new User({ uuid: "usr_rel_3347", first_name: "Diego", last_name: "Mora", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Diego", category_tag: "#3347", username: "diego_m", club_uuids: ["club_001", "club_012"] }),
+    new User({ uuid: "usr_rel_4521", first_name: "María", last_name: "García", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Maria", user_tag: "#4521", username: "maria_g", club_uuids: ["club_001", "club_004"] }),
+    new User({ uuid: "usr_rel_8834", first_name: "Juan", last_name: "Pérez", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Juan", user_tag: "#8834", username: "juan_p", club_uuids: ["club_002", "club_009"] }),
+    new User({ uuid: "usr_rel_1190", first_name: "Ana", last_name: "Torres", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Ana", user_tag: "#1190", username: "ana_t", club_uuids: ["club_003", "club_014"] }),
+    new User({ uuid: "usr_rel_6673", first_name: "Carlos", last_name: "López", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Carlos", user_tag: "#6673", username: "carlos_l", club_uuids: ["club_001", "club_006"] }),
+    new User({ uuid: "usr_rel_2201", first_name: "Pedro", last_name: "Ruiz", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Pedro", user_tag: "#2201", username: "pedro_r", club_uuids: ["club_002", "club_010"] }),
+    new User({ uuid: "usr_rel_9910", first_name: "Laura", last_name: "Díaz", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Laura", user_tag: "#9910", username: "laura_d", club_uuids: ["club_003", "club_005"] }),
+    new User({ uuid: "usr_rel_3347", first_name: "Diego", last_name: "Mora", avatar_url: "https://api.dicebear.com/7.x/avataaars/svg?seed=Diego", user_tag: "#3347", username: "diego_m", club_uuids: ["club_001", "club_012"] }),
 ];
 
 export const MASTER_USER = new User({
     uuid: "usr_master_7842",
-    category_tag: "#7842",
+    user_tag: "#7842",
     first_name: "Santiago",
     last_name: "Mejias",
     username: "santi_dev",

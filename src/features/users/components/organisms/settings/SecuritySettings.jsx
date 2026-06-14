@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import SettingsButton from "@/shared/components/ui/atoms/SettingsButton";
 import { useMutateUser } from "@/features/users/hooks/useMutateUser";
 import { useSessions } from "@/features/users/hooks/useSessions";
+import { generateClientUUID } from "@/shared/utils/uuid";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import { FiShield, FiAlertTriangle, FiLoader } from "react-icons/fi";
 import { toast } from "sonner";
@@ -46,7 +47,7 @@ export default function SecuritySettings() {
   const handleUpdatePassword = () => {
     if (!canSubmitPw) return;
     updateUser({
-      client_uuid: crypto.randomUUID(),
+      client_uuid: generateClientUUID(),
       current_password: currentPw,
       new_password: newPw
     }, {

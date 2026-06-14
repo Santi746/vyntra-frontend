@@ -2,6 +2,7 @@
 
 import DMTemplate from "@/features/chat/components/templates/DMTemplate";
 import UserModal from "@/features/users/components/organisms/UserModal";
+import ClubPreviewModal from "@/features/clubs/components/organisms/ClubPreviewModal";
 import { Suspense } from "react";
 
 /**
@@ -21,6 +22,7 @@ export default function DMLayout({ children }) {
         {children}
       </DMTemplate>
       <UserModal />
+      <ClubPreviewModal />
     </Suspense>
   );
 }

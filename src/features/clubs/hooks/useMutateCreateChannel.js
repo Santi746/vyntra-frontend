@@ -42,7 +42,7 @@ export function useMutateCreateChannel(club_uuid) {
         name,
         type,
         is_private,
-        order: Date.now(),
+        sort_order: Date.now(),
         description: "",
         status: "creating",
       };

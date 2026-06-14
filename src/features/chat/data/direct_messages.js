@@ -15,8 +15,9 @@ import { MASTER_USER, USERS_TABLE } from "@/features/users/data/users_table";
  * @typedef {Object} DMConversation
  * @property {string} uuid - Identificador único de la conversación.
  * @property {Object} participant - El otro participante de la conversación (no el usuario actual).
- * @property {string} last_message_content - Contenido del último mensaje enviado.
- * @property {string} last_message_at - Marca temporal ISO del último mensaje.
+ * @property {Object} last_message - Último mensaje de la conversación.
+ * @property {string} last_message.content - Contenido del último mensaje.
+ * @property {string} last_message.created_at - Marca temporal ISO del último mensaje.
  * @property {number} unread_count - Cantidad de mensajes no leídos.
  */
 
@@ -25,50 +26,43 @@ export const MOCK_DM_CONVERSATIONS = [
   {
     uuid: "dm_conv_001",
     participant: USERS_TABLE.find(u => u.uuid === "usr_rel_4521"),
-    last_message_content: "¡Hola! ¿Cómo va todo?",
-    last_message_at: "2026-05-09T22:30:00Z",
+    last_message: { content: "¡Hola! ¿Cómo va todo?", created_at: "2026-05-09T22:30:00Z" },
     unread_count: 2,
   },
   {
     uuid: "dm_conv_002",
     participant: USERS_TABLE.find(u => u.uuid === "usr_rel_8834"),
-    last_message_content: "¿Viste el último update del DLC?",
-    last_message_at: "2026-05-09T21:15:00Z",
+    last_message: { content: "¿Viste el último update del DLC?", created_at: "2026-05-09T21:15:00Z" },
     unread_count: 0,
   },
   {
     uuid: "dm_conv_003",
     participant: USERS_TABLE.find(u => u.uuid === "usr_rel_1190"),
-    last_message_content: "Dale, nos vemos mañana en el raid.",
-    last_message_at: "2026-05-09T20:00:00Z",
+    last_message: { content: "Dale, nos vemos mañana en el raid.", created_at: "2026-05-09T20:00:00Z" },
     unread_count: 1,
   },
   {
     uuid: "dm_conv_004",
     participant: USERS_TABLE.find(u => u.uuid === "usr_rel_6673"),
-    last_message_content: "Te envié las runas por correo del juego.",
-    last_message_at: "2026-05-09T18:45:00Z",
+    last_message: { content: "Te envié las runas por correo del juego.", created_at: "2026-05-09T18:45:00Z" },
     unread_count: 0,
   },
   {
     uuid: "dm_conv_005",
     participant: USERS_TABLE.find(u => u.uuid === "usr_rel_2201"),
-    last_message_content: "Buena build, la voy a probar esta noche.",
-    last_message_at: "2026-05-09T17:30:00Z",
+    last_message: { content: "Buena build, la voy a probar esta noche.", created_at: "2026-05-09T17:30:00Z" },
     unread_count: 0,
   },
   {
     uuid: "dm_conv_006",
     participant: USERS_TABLE.find(u => u.uuid === "usr_rel_9910"),
-    last_message_content: "¿Alguien tiene la llave del calabozo secreto?",
-    last_message_at: "2026-05-09T16:00:00Z",
+    last_message: { content: "¿Alguien tiene la llave del calabozo secreto?", created_at: "2026-05-09T16:00:00Z" },
     unread_count: 3,
   },
   {
     uuid: "dm_conv_007",
     participant: USERS_TABLE.find(u => u.uuid === "usr_rel_3347"),
-    last_message_content: "GG, fue una buena partida.",
-    last_message_at: "2026-05-09T14:20:00Z",
+    last_message: { content: "GG, fue una buena partida.", created_at: "2026-05-09T14:20:00Z" },
     unread_count: 0,
   },
 ];

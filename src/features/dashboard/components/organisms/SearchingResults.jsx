@@ -30,10 +30,16 @@ export default function SearchingResults({ searchTerm = "" }) {
     isFetchingNextPage 
   } = useSearchClubs(searchTerm, activeFilter);
 
-  // Aplanamos las páginas para obtener una lista única
-  const results = resultsData?.pages.flatMap(page => page.data) || [];
-  // Usamos el totalCount de la primera página para el contador
-  const totalCount = resultsData?.pages[0]?.totalCount || 0;
+  // La forma del backend es { data: { clubs: { data, meta }, users: { data, meta } } }
+  // Aplanamos todos los items (clubes + usuarios) de todas las páginas cargadas,
+  // marcándolos con `_type` para que el renderizado sepa discriminarlos (el backend
+  // no envía discriminador porque la respuesta ya viene agrupada por tipo).
+  const flatClubs = resultsData?.pages.flatMap(page => (page?.data?.clubs?.data ?? []).map(c => ({ ...c, _type: 'club' }))) || [];
+  const flatUsers = resultsData?.pages.flatMap(page => (page?.data?.users?.data ?? []).map(u => ({ ...u, _type: 'user' }))) || [];
+  const results = [...flatClubs, ...flatUsers];
+  // El backend no expone totalCount; lo derivamos de los items ya cargados en memoria.
+  // (Best practice senior: el frontend cuenta lo que ve, el backend no pagina totales globales.)
+  const totalCount = results.length;
 
   return (
     <div className="flex flex-col gap-6">

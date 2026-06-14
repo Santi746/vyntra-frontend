@@ -40,14 +40,17 @@ export function useMutateFriendRequests() {
           pages: oldData.pages.map((page) => ({
             ...page,
             data: page.data.map((req) =>
-              req.uuid === request_uuid
+              // En la rama inteligente de FriendshipResource, el id de la solicitud
+              // viene en `friendship_uuid` (no en `uuid`, que es el del amigo).
+              (req.friendship_uuid ?? req.uuid) === request_uuid
                 ? { ...req, status: action === "accept" ? "accepted" : "declined" }
                 : req
             ).filter((req) => {
+              const reqId = req.friendship_uuid ?? req.uuid;
               // Si declinamos, la borramos visualmente de inmediato
-              if (req.uuid === request_uuid && action === "decline") return false;
+              if (reqId === request_uuid && action === "decline") return false;
               // Si aceptamos, también la solemos borrar de la lista de "pendientes"
-              if (req.uuid === request_uuid && action === "accept") return false;
+              if (reqId === request_uuid && action === "accept") return false;
               return true;
             }),
           })),

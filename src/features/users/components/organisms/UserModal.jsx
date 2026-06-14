@@ -13,7 +13,6 @@ import {
 import useBreakpointValue from "@/shared/hooks/useBreakpointValue";
 import Badge from "@/shared/components/ui/atoms/Badge";
 import Button from "@/shared/components/ui/atoms/Button";
-import UserAvatar from "@/shared/components/ui/atoms/UserAvatar";
 import { useSearchParams } from "next/navigation";
 import { useEffect, useState } from "react";
 import { usePathname } from "next/navigation";
@@ -62,12 +61,12 @@ export default function UserModal() {
   const maxClubsVisible = useBreakpointValue([{ maxWidth: 375, value: 2 }], 3);
   const { data: user, isLoading: isUserLoading } = useUser(userId);
   const { data: currentUser } = useCurrentUser();
-  
+
   const isCurrentUser = user?.uuid === currentUser?.uuid;
 
   const { data: userClubs } = useUserClubs(isCurrentUser ? null : user?.uuid, isCurrentUser ? null : user?.club_uuids);
   const { data: friendsData } = useFriends();
-  
+
   const friends = friendsData?.pages?.[0]?.data || [];
 
   useEffect(() => {
@@ -82,7 +81,7 @@ export default function UserModal() {
   if (!mounted) return null;
 
   const resolvedClubs = (userClubs || []).map((club) => {
-    return { uuid: club.uuid, name: club.name, logo: club.logo_url };
+    return { uuid: club.uuid, name: club.name, logo: club.avatar_url };
   });
 
   return createPortal(

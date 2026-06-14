@@ -35,7 +35,7 @@ export function useMutateCreateClub() {
      * onMutate: Inyección optimista del club en la caché.
      */
     onMutate: async (variables) => {
-      const { client_uuid, name, description, category_tag, logo_url, banner_url, owner_uuid } = variables;
+      const { client_uuid, name, description, category_tag, avatar_url, banner_url, owner_uuid } = variables;
 
       // 1. Obtener los IDs actuales del usuario para encontrar la QueryKey exacta
       const currentUser = queryClient.getQueryData(["current_user_v2"]);
@@ -56,7 +56,7 @@ export function useMutateCreateClub() {
         name,
         description,
         category_tag,
-        logo_url,
+        avatar_url,
         banner_url,
         owner_uuid,
         members_count: 1,

@@ -6,6 +6,8 @@ import { Users, TrendingUp } from "lucide-react";
 import Badge from "@/shared/components/ui/atoms/Badge";
 import VerifiedIcon from "@/shared/components/ui/atoms/VerifiedIcon";
 import Link from "next/link";
+import { usePathname, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 
 
 /**
@@ -15,7 +17,7 @@ import Link from "next/link";
  * @property {string} description - A brief summary of what the club is about.
  * @property {string} category_tag - The category or label (e.g., "is_verified", "Tech", "Design").
  * @property {string} banner_url - The URL for the large background cover banner_url.
- * @property {string} logo_url - The URL for the club's avatar_url logo.
+ * @property {string} avatar_url - The URL for the club's avatar_url logo.
  * @property {string} members_count - The total number of members_count (e.g., "12.4k").
  * @property {string} online_count - The number of online_count members_count (e.g., "1.2k").
  * @property {string} [featured_text] - Optional trending text shown at the bottom.
@@ -30,6 +32,16 @@ import Link from "next/link";
  * @param {Club} props.club - The club data object to render.
  */
 export default function ClubCard({ club }) {
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  const buildPreviewHref = () => {
+    const params = new URLSearchParams(searchParams.toString());
+    params.set("preview", club.uuid);
+    params.delete("user");
+    params.delete("notifications");
+    return `${pathname}?${params.toString()}`;
+  };
   // destructuring de las propiedades del club
   const {
     uuid,
@@ -37,7 +49,7 @@ export default function ClubCard({ club }) {
     category_tag,
     description,
     banner_url,
-    logo_url,
+    avatar_url,
     members_count,
     online_count,
     is_verified,
@@ -49,7 +61,8 @@ export default function ClubCard({ club }) {
   }
 
   return (
-    <Link href={`/?preview=${club.uuid}`} scroll={false}>
+    <Suspense fallback={null}>
+      <Link href={buildPreviewHref()} scroll={false}>
       <div className="group border-forest-border bg-forest-deep hover:border-forest-accent/50 hover:shadow-card-glow relative w-full cursor-pointer overflow-hidden rounded-2xl border transition-[border-color,box-shadow] duration-300">
       {/* BANNER: Imagen de fondo con gradiente suave inferior */}
       <div className="relative h-28 w-full overflow-hidden">
@@ -72,19 +85,23 @@ export default function ClubCard({ club }) {
         {/* ICONO / AVATAR */}
         <div className="border-forest-deep bg-forest-card absolute -top-7 left-4 h-14 w-14 overflow-hidden rounded-full border-4">
           <div className="bg-forest-accent-dark/20 flex h-full w-full items-center justify-center">
-            {logo_url?.endsWith(".svg") ? (
-              <img
-                src={logo_url}
-                alt={`${name} logo_url`}
-                className="h-full w-full object-cover"
+            {avatar_url?.endsWith(".svg") ? (
+              <Image
+                src={avatar_url}
+                alt={`${name} avatar_url`}
+                fill
+                sizes="56px"
+                className="object-cover"
+                unoptimized
               />
             ) : (
               <Image
-                src={logo_url}
-                alt={`${name} logo_url`}
+                src={avatar_url}
+                alt={`${name} avatar_url`}
                 fill
+                sizes="56px"
                 className="object-cover"
-                unoptimized={logo_url?.includes("dicebear")}
+                unoptimized={avatar_url?.includes("dicebear")}
               />
             )}
           </div>
@@ -118,6 +135,7 @@ export default function ClubCard({ club }) {
       </div>
       </div>
     </Link>
+    </Suspense>
   );
 }
 

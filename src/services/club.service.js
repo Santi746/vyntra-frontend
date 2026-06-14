@@ -55,6 +55,42 @@ export const ClubService = {
   },
 
   /**
+   * Obtiene el preview público de un club. **EXCEPCIÓN ARQUITECTÓNICA.**
+   *
+   * Este es el único endpoint de club que NO requiere membresía en el backend.
+   * Devuelve solo datos básicos (name, banner, avatar, descripción, members_count)
+   * y un flag `is_member` calculado a partir del usuario autenticado.
+   *
+   * Se usa para renderizar el ClubPreviewModal cuando un usuario NO miembro
+   * hace clic en una card de club. NO usar para cargar el detalle completo
+   * de un club del que el usuario ya es miembro — para eso está getClubByUuid.
+   *
+   * @param {string} club_uuid - UUID del club.
+   * @returns {Promise<Object>} Datos de preview del club.
+   */
+  async getClubPreview(club_uuid) {
+    await mockRequest(MOCK_CONFIG.DELAYS.MEDIUM);
+    const club = ClubsTable.find((c) => c.uuid === club_uuid);
+    if (!club) throw new Error("Club not found");
+    return {
+      status: "success",
+      data: {
+        uuid: club.uuid,
+        name: club.name,
+        description: club.description ?? null,
+        category_tag: club.category_tag,
+        avatar_url: club.avatar_url ?? null,
+        banner_url: club.banner_url ?? null,
+        is_verified: Boolean(club.is_verified),
+        members_count: 1,
+        online_count: 0,
+        is_member: false,
+        created_at: club.created_at,
+      },
+    };
+  },
+
+  /**
    * Obtiene las categorías de canales de un club.
    * @param {string} club_uuid - UUID del club.
    * @returns {Promise<Object>} Lista de categorías.
@@ -152,7 +188,7 @@ export const ClubService = {
         name,
         is_private,
         channels: [],
-        order: Date.now(),
+        sort_order: Date.now(),
       },
     };
   },
@@ -186,7 +222,7 @@ export const ClubService = {
         name,
         type,
         is_private,
-        order: Date.now(),
+        sort_order: Date.now(),
       },
     };
   },
@@ -263,7 +299,7 @@ export const ClubService = {
    * @param {Object} data - Datos del club (client_uuid, name, description, etc).
    * @returns {Promise<Object>} Club creado.
    */
-  async createClub({ client_uuid, name, description, category_tag, logo_url, banner_url, owner_uuid }) {
+  async createClub({ client_uuid, name, description, category_tag, avatar_url, banner_url, owner_uuid }) {
     await mockRequest(MOCK_CONFIG.DELAYS.SLOW);
     return {
       status: "success",
@@ -272,7 +308,7 @@ export const ClubService = {
         name,
         description,
         category_tag,
-        logo_url,
+        avatar_url,
         banner_url,
         owner_uuid,
         members_count: 1,

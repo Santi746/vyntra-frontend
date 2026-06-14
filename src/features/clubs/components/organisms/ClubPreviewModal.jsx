@@ -29,7 +29,7 @@ import ClubPreviewModalSkeleton from "@/features/clubs/components/atoms/ClubPrev
  * Consume el DTO `CLUB_MODAL_DATA` que reutiliza campos existentes del catálogo de clubes.
  *
  * Secciones:
- * - logo_url con iniciales + botón cerrar
+ * - avatar_url con iniciales + botón cerrar
  * - Título + badge verificado
  * - Tags (pills)
  * - Descripción
@@ -45,13 +45,13 @@ export default function ClubPreviewModal() {
   const previewId = searchParams.get("preview");
 
   // [REGLA DE ORO: HOOKS SIEMPRE AL PRINCIPIO]
-  const { 
-    data: club, 
-    isPending: isClubPending, 
-    isError: isClubError 
+  const {
+    data: club,
+    isPending: isClubPending,
+    isError: isClubError
   } = useClub(previewId);
 
-  const { 
+  const {
     data: owner,
     isPending: isOwnerPending,
     isError: isOwnerError
@@ -116,7 +116,7 @@ export default function ClubPreviewModal() {
 
   return (
     <motion.div
-      className="fixed inset-0 z-999999 flex items-center justify-center overflow-y-auto bg-black/60 p-4 backdrop-blur-sm"
+      className="fixed inset-0 z-999999 flex items-center justify-center overflow-y-auto bg-black/60 p-4"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 0.3 }}
@@ -130,19 +130,19 @@ export default function ClubPreviewModal() {
         animate={{ opacity: 1, scale: 1, y: 0 }}
         transition={{ duration: 0.4, delay: 0.1, ease: "easeOut" }}
       >
-        {/* â”€â”€ Banner Header â”€â”€ */}
-        <div className="relative h-28 w-full overflow-hidden">
-          <Image
-            src={club.banner_url}
-            alt="Banner del club"
-            fill
-            sizes="(max-width: 768px) 100vw, 800px"
-            className="object-cover transition-transform duration-700 hover:scale-110"
-          />
-          <div className="to-forest-deep via-forest-deep/40 absolute inset-0 bg-linear-to-b from-transparent" />
+        {/* ─── Banner Header ─── */}
+        <div className="relative h-28 w-full overflow-hidden bg-forest-stat">
+          {club.banner_url ? (
+            <img
+              src={club.banner_url}
+              alt="Banner del club"
+              className="block h-full w-full object-cover transition-transform duration-700 hover:scale-110"
+            />
+          ) : null}
+          <div className="absolute inset-0 bg-gradient-to-b from-transparent to-forest-deep/80" />
           <Link href={closeHref} scroll={false}>
             <button
-              className="text-forest-muted absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-black/60 backdrop-blur-md transition-all hover:bg-black/80 hover:text-white active:scale-95"
+              className="absolute top-3 right-3 flex h-9 w-9 cursor-pointer items-center justify-center rounded-full border border-white/10 bg-black/60 text-white backdrop-blur-md transition-all hover:bg-black/80 active:scale-95"
               aria-label="Cerrar modal"
             >
               <X size={18} />
@@ -150,15 +150,15 @@ export default function ClubPreviewModal() {
           </Link>
         </div>
 
-        {/* â”€â”€ logo_url del Club â”€â”€ */}
-        <div className="relative -mt-10 px-5">
-          <div className="bg-forest-stat border-forest-border relative flex h-16 w-16 items-center justify-center overflow-hidden rounded-xl border-2 sm:h-18 sm:w-18">
+        {/* ─── Avatar del Club ─── */}
+        <div className="relative -mt-9 px-6">
+          <div className="relative border-forest-deep bg-forest-card h-[72px] w-[72px] overflow-hidden rounded-xl border-4 shadow-xl">
             <Image
-              src={club.logo_url}
-              alt={`logo_url de ${club.name}`}
+              src={club.avatar_url}
+              alt={`Avatar de ${club.name}`}
               fill
               sizes="72px"
-              className="cursor-pointer object-cover"
+              className="object-cover"
             />
           </div>
         </div>

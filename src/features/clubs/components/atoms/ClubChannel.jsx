@@ -3,7 +3,7 @@
 import { motion } from "framer-motion";
 import { useParams, useRouter } from "next/navigation";
 import Link from "next/link";
-import { Settings } from "lucide-react";
+import { Settings, Lock } from "lucide-react";
 import { useQueryString } from "@/shared/hooks/useQueryString";
 
 import { useCheckPermission } from "@/features/clubs/hooks/useCheckPermission";
@@ -12,8 +12,17 @@ import { PERMISSIONS } from "@/shared/constants/permissions";
 /**
  * @component ClubChannel
  * @description Átomo que representa un botón de acceso a un canal individual de chat.
+ *              Muestra un icono de candado si el canal es privado.
+ *
+ * @param {string}        name          Nombre del canal
+ * @param {number}        i             Índice para animación escalonada
+ * @param {string}        uuid          UUID del canal
+ * @param {string}        category_uuid UUID de la categoría padre
+ * @param {boolean}       active        Si el canal está seleccionado actualmente
+ * @param {string}        club_uuid     UUID del club
+ * @param {boolean}       [is_private]  Si el canal es privado
  */
-export default function ClubChannel({ name, i, uuid, category_uuid, active, club_uuid }) {
+export default function ClubChannel({ name, i, uuid, category_uuid, active, club_uuid, is_private = false }) {
   const params = useParams();
   const router = useRouter();
   const { createQueryString } = useQueryString();
@@ -81,6 +90,13 @@ export default function ClubChannel({ name, i, uuid, category_uuid, active, club
           >
             {name}
           </p>
+          {is_private && (
+            <Lock
+              size={12}
+              className="shrink-0 text-forest-muted-alt"
+              aria-label="Canal privado"
+            />
+          )}
         </button>
 
         {/* Botón de configuración (solo en hover Y con permisos) */}
@@ -100,3 +116,4 @@ export default function ClubChannel({ name, i, uuid, category_uuid, active, club
     </>
   );
 }
+

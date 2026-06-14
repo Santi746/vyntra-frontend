@@ -54,7 +54,7 @@ export default function ChatMessageList({
           itemContent={(i, msg) => {
             // Compara con el mensaje anterior (más viejo) para ocultar avatar si es el mismo autor
             const isSameAuthor = i > 0 && reversedMessages[i - 1]?.sender_uuid === msg.sender_uuid;
-            
+
             return (
               <div className="py-0.5 px-4">
                 <UserMessage

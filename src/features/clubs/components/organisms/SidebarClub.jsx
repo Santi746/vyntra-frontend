@@ -96,7 +96,7 @@ export default function SidebarClub({ isClubOpen, isMobile, clubSidebarLayout })
             // desaparezca para que no quede "flotando" sin ícono.
             onMouseLeave={handleMouseLeave}
           >
-            {/* logo_url Principal / Indicador de Clubs */}
+            {/* avatar_url Principal / Indicador de Clubs */}
             <div
               className={`relative flex ${isMobile && !isVerticalMobile ? "flex-row" : "flex-col"} items-center`}
             >
@@ -138,11 +138,12 @@ export default function SidebarClub({ isClubOpen, isMobile, clubSidebarLayout })
                   onMouseLeave={!isMobile ? handleMouseLeave : undefined}
                 >
                   <Image
-                    src={tempClub.logo_url}
-                    alt={tempClub.name}
+                    src={tempClub.avatar_url}
+                    alt={`${tempClub.name} logo`}
                     fill
-                    className="rounded-3xl object-cover md:rounded-full"
-                    unoptimized={tempClub.logo_url?.includes("dicebear")}
+                    sizes="48px"
+                    className="rounded-3xl object-cover"
+                    unoptimized={tempClub.avatar_url?.includes("dicebear")}
                   />
                   
                   {/* El 'Pill' indicador de Discord (Solo en PC lateral) */}

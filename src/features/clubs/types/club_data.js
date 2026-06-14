@@ -22,7 +22,7 @@ export class ClubData {
      * @param {string|number} online_count  - Usuarios en línea.
      * @param {string} featured_text - Texto destacado (featured_text).
      * @param {boolean} is_verified - Estado de verificación.
-     * @param {string} logo_url     - URL del icono/perfil.
+     * @param {string} avatar_url     - URL del icono/perfil.
      * @param {string} created_at   - Fecha de creación.
      * @param {string} owner_uuid   - UUID del dueño.
      * @param {Array} categories    - Categorías adicionales.
@@ -39,7 +39,7 @@ export class ClubData {
         online_count,
         featured_text,
         is_verified,
-        logo_url,
+        avatar_url,
         created_at,
         owner_uuid,
         default_channel_uuid = "category-001-channel-001" // 🛠️ [Vyne-Mode-Easy]: Valor plano para navegación rápida
@@ -53,7 +53,7 @@ export class ClubData {
         this.online_count = online_count;
         this.featured_text = featured_text;
         this.is_verified = is_verified;
-        this.logo_url = logo_url;
+        this.avatar_url = avatar_url;
         this.created_at = created_at;
         this.owner_uuid = owner_uuid;
         this.default_channel_uuid = default_channel_uuid;

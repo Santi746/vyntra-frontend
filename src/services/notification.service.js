@@ -8,6 +8,11 @@ import { mockRequest, MOCK_CONFIG } from "@/shared/utils/mock.utils";
 export const NotificationService = {
   /**
    * Obtiene la lista de solicitudes de amistad pendientes con paginación por cursor.
+   *
+   * Transformamos cada item del mock (forma `{ uuid, user: {...} }`) al contrato
+   * real del backend (rama inteligente de FriendshipResource):
+   *   { uuid: <user.uuid>, friendship_uuid: <request.uuid>, friend: <user>, status }
+   *
    * @param {string|null} pageParam - Cursor para paginación.
    * @returns {Promise<Object>} Lista de solicitudes y metadatos.
    */
@@ -24,11 +29,25 @@ export const NotificationService = {
     const start = Math.max(0, pivotIndex - limit);
     const paginatedData = mockFriendRequests.slice(start, pivotIndex);
 
-    const next_cursor = start > 0 ? paginatedData[0]?.uuid : null;
+    // Mapeamos al contrato del backend (rama inteligente de FriendshipResource)
+    const transformed = paginatedData.map((req) => ({
+      uuid: req.user.uuid,
+      friendship_uuid: req.uuid,
+      friend: {
+        uuid: req.user.uuid,
+        display_name: req.user.display_name,
+        username: req.user.username,
+        avatar_url: req.user.avatar_url,
+      },
+      status: req.status,
+      created_at: req.created_at,
+    }));
+
+    const next_cursor = start > 0 ? transformed[0]?.friendship_uuid : null;
 
     return {
       status: "success",
-      data: paginatedData,
+      data: transformed,
       meta: { next_cursor, per_page: limit },
     };
   },

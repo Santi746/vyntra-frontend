@@ -94,7 +94,7 @@ export default function CreateClubModal() {
         name: name.trim(),
         description: description.trim(),
         category_tag: categoryTag,
-        logo_url: logoPreview,
+        avatar_url: logoPreview,
         banner_url: bannerPreview,
         owner_uuid: currentUser?.uuid,
       },

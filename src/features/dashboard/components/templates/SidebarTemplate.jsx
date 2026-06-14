@@ -31,13 +31,13 @@ export default function SidebarTemplate({ children }) {
   const { createQueryString } = useQueryString();
   const pathname = usePathname();
   const { clubSidebarLayout } = useSettingsStore();
-  
+
   const isAuthPage = pathname === "/login" || pathname === "/register";
 
   // ── Detección de ruta de Mensajes Directos ──
   const isDMRoute = pathname.startsWith("/me");
   const isInDMChat = isDMRoute && pathname.split("/").filter(Boolean).length > 1; // e.g. ['me', '1234']
-  
+
   const isNotificationsOpen = searchParams.get("notifications") === "true";
 
   const closeNotifications = () => {

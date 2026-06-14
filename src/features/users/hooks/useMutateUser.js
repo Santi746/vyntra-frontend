@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { UserService } from "@/services/user.service";
+import { toast } from "sonner";
 
 /**
  * @file useMutateUser.js
@@ -44,10 +45,11 @@ export function useMutateUser() {
     /**
      * onError — Rollback instantáneo al backup si falla.
      */
-    onError: (_err, _variables, context) => {
+    onError: (err, _variables, context) => {
       if (context?.previousUser) {
         queryClient.setQueryData(["current_user_v2"], context.previousUser);
       }
+      toast.error("Error al actualizar perfil", { description: err.message });
     },
 
     /**

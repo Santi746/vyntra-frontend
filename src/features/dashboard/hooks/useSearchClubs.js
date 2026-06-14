@@ -19,7 +19,16 @@ export function useSearchClubs(searchTerm, filterType) {
       return response;
     },
     initialPageParam: null,
-    getNextPageParam: (lastPage) => lastPage.meta?.next_cursor,
+    getNextPageParam: (lastPage) => {
+      // La forma del backend es { data: { clubs: { meta }, users: { meta } } }.
+      // Mientras alguno de los dos buckets activos tenga next_cursor, pedimos la siguiente página.
+      const clubsCursor = lastPage?.data?.clubs?.meta?.next_cursor;
+      const usersCursor = lastPage?.data?.users?.meta?.next_cursor;
+      if (filterType === 'clubs') return clubsCursor ?? null;
+      if (filterType === 'users') return usersCursor ?? null;
+      // 'all': devolvemos el primero que no sea null; el backend los trata como un único cursor conceptual.
+      return clubsCursor || usersCursor || null;
+    },
     enabled: searchTerm.length > 0,
     staleTime: 1000 * 60, // 1 minuto de caché para búsquedas
   });

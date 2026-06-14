@@ -1,6 +1,7 @@
 import React, { useState, useRef } from "react";
 import { useCurrentUser } from "@/features/users/hooks/useCurrentUser";
 import { useMutateUser } from "@/features/users/hooks/useMutateUser";
+import { generateClientUUID } from "@/shared/utils/uuid";
 import { FiCamera, FiMail, FiUser, FiAtSign } from "react-icons/fi";
 import { toast } from "sonner";
 import SettingsHeader from "@/shared/components/ui/molecules/SettingsHeader";
@@ -46,7 +47,7 @@ export default function MyAccountSettings() {
 
   const handleSave = () => {
     updateUser({
-      client_uuid: crypto.randomUUID(),
+      client_uuid: generateClientUUID(),
       ...pendingData,
     }, {
       onSuccess: () => {

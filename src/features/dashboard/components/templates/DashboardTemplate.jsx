@@ -26,6 +26,8 @@ export default function DashboardTemplate({ className = "" }) {
   const [searchTerm, setSearchTerm] = useState("");
   const [debouncedTerm, setDebouncedTerm] = useState("");
 
+  // El hook ya devuelve response.data (la estructura { featuredClubs, categories }).
+  // Lectura defensiva para tolerar respuestas parciales o del backend real.
   const featuredClubs = data?.featuredClubs || [];
   const categories = data?.categories || [];
 

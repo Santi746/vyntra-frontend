@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { ClubService } from "@/services/club.service";
+import { toast } from "sonner";
 
 /**
  * @hook useMutateClubRoles
@@ -33,6 +34,7 @@ export function useMutateClubRoles(club_uuid) {
     },
     onError: (err, newRole, context) => {
       queryClient.setQueryData(['club_roles', club_uuid], context.previousRoles);
+      toast.error("Error al crear rol", { description: err.message });
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['club_roles', club_uuid] });
@@ -59,6 +61,7 @@ export function useMutateClubRoles(club_uuid) {
     },
     onError: (err, updatedRole, context) => {
       queryClient.setQueryData(['club_roles', club_uuid], context.previousRoles);
+      toast.error("Error al actualizar rol", { description: err.message });
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['club_roles', club_uuid] });
@@ -101,6 +104,7 @@ export function useMutateClubRoles(club_uuid) {
     onError: (err, vars, context) => {
       if (context.previousMembers) queryClient.setQueryData(['club_members', club_uuid], context.previousMembers);
       if (context.previousClub) queryClient.setQueryData(['club', club_uuid], context.previousClub);
+      toast.error("Error al asignar rol", { description: err.message });
     },
     onSettled: () => {
       queryClient.invalidateQueries({ queryKey: ['club_members', club_uuid] });

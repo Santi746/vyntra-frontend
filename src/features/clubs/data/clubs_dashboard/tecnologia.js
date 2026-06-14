@@ -19,7 +19,7 @@ export const TECNOLOGIA_CLUBS = [
         online_count: "2.1k",
         featured_text: "Inmersión profunda en Server Actions",
         is_verified: true,
-        logo_url: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=200&h=200&q=80",
+        avatar_url: "https://images.unsplash.com/photo-1627398242454-45a1465c2479?auto=format&fit=crop&w=200&h=200&q=80",
         created_at: "2023",
         owner_uuid: "usr_master_7842",
         categories: categories
@@ -34,7 +34,7 @@ export const TECNOLOGIA_CLUBS = [
         online_count: "4.2k",
         featured_text: "Rumores sobre la arquitectura de GPT-5",
         is_verified: true,
-        logo_url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=200&h=200&q=80",
+        avatar_url: "https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=200&h=200&q=80",
         created_at: "2024",
         owner_uuid: "usr_rel_8834",
         categories: categories
@@ -49,7 +49,7 @@ export const TECNOLOGIA_CLUBS = [
         online_count: "3.1k",
         featured_text: "Funciones de Python 3.13",
         is_verified: false,
-        logo_url: "https://images.unsplash.com/photo-1526374870839-e155464bb9b2?auto=format&fit=crop&w=200&h=200&q=80",
+        avatar_url: "https://images.unsplash.com/photo-1526374870839-e155464bb9b2?auto=format&fit=crop&w=200&h=200&q=80",
         created_at: "2010",
         owner_uuid: "usr_rel_1190",
         categories: categories
@@ -64,7 +64,7 @@ export const TECNOLOGIA_CLUBS = [
         online_count: "1.2k",
         featured_text: "Nuevo exploit de día cero encontrado",
         is_verified: true,
-        logo_url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=200&h=200&q=80",
+        avatar_url: "https://images.unsplash.com/photo-1563986768609-322da13575f3?auto=format&fit=crop&w=200&h=200&q=80",
         created_at: "2019",
         owner_uuid: "usr_rel_2201",
         categories: categories
@@ -79,7 +79,7 @@ export const TECNOLOGIA_CLUBS = [
         online_count: "850",
         featured_text: "Configuración básica de Kubernetes",
         is_verified: true,
-        logo_url: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=200&h=200&q=80",
+        avatar_url: "https://images.unsplash.com/photo-1544197150-b99a580bb7a8?auto=format&fit=crop&w=200&h=200&q=80",
         created_at: "2021",
         owner_uuid: "usr_rel_3347",
         categories: categories

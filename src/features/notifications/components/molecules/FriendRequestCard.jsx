@@ -6,18 +6,23 @@ import { motion } from "framer-motion";
 /**
  * El componente FriendRequestCard muestra una solicitud de amistad pendiente o recientemente aceptada.
  * Proporciona acciones para aceptar o rechazar la solicitud con retroalimentación visual.
- * 
+ *
  * @component
  * @param {Object} props - Propiedades del componente
  * @param {Object} props.request - El objeto de datos de la solicitud de amistad.
- * @param {string} props.request.uuid - Identificador único de la solicitud.
+ *                                  En la rama inteligente de FriendshipResource (backend),
+ *                                  el `uuid` raíz es el del usuario amigo y `friendship_uuid`
+ *                                  es el de la solicitud. `friend` es el objeto del usuario
+ *                                  que envió la solicitud.
+ * @param {string} props.request.uuid - Identificador del usuario amigo.
+ * @param {string} props.request.friendship_uuid - Identificador único de la solicitud.
  * @param {string} props.request.status - Estado actual de la solicitud ('pending', 'accepted', etc.).
- * @param {Object} props.request.user - Datos del usuario que envió la solicitud.
- * @param {string} props.request.user.uuid - Identificador único del usuario.
- * @param {string} props.request.user.display_name - Nombre a mostrar del usuario.
- * @param {string} props.request.user.username - Nombre de usuario.
- * @param {string} props.request.user.avatar_url - URL de la imagen del avatar del usuario.
- * @param {Function} props.onAction - Función callback disparada después de que se realiza una acción (aceptar/rechazar). Recibe (uuid, action).
+ * @param {Object} props.request.friend - Datos del usuario que envió la solicitud.
+ * @param {string} props.request.friend.uuid - Identificador único del usuario.
+ * @param {string} props.request.friend.display_name - Nombre a mostrar del usuario.
+ * @param {string} props.request.friend.username - Nombre de usuario.
+ * @param {string} props.request.friend.avatar_url - URL de la imagen del avatar del usuario.
+ * @param {Function} props.onAction - Función callback disparada después de que se realiza una acción (aceptar/rechazar). Recibe (friendship_uuid, action).
  * @returns {JSX.Element}
  */
 export default function FriendRequestCard({ request, onAction, isPending }) {
@@ -25,7 +30,8 @@ export default function FriendRequestCard({ request, onAction, isPending }) {
 
   const handleAction = (action) => {
     if (onAction) {
-      onAction(request.uuid, action);
+      // Usamos friendship_uuid (no uuid) porque uuid es el del amigo, no el de la solicitud.
+      onAction(request.friendship_uuid, action);
     }
   };
 
@@ -41,17 +47,17 @@ export default function FriendRequestCard({ request, onAction, isPending }) {
     >
       <div className="flex items-center gap-4 w-full">
         <UserAvatar
-          uuid={request.user.uuid}
-          avatar_url={request.user.avatar_url}
-          display_name={request.user.display_name}
+          uuid={request.friend.uuid}
+          avatar_url={request.friend.avatar_url}
+          display_name={request.friend.display_name}
           size="lg"
         />
         <div className="flex flex-col flex-1 min-w-0">
           <span className="text-forest-light font-semibold text-sm truncate">
-            {request.user.display_name}
+            {request.friend.display_name}
           </span>
           <span className="text-forest-muted text-xs truncate">
-            @{request.user.username}
+            @{request.friend.username}
           </span>
           {isAccepted && (
             <span className="text-forest-accent text-xs font-medium mt-1 flex items-center gap-1">

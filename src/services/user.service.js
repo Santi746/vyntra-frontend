@@ -2,8 +2,8 @@ import { FRIENDS_LIST, USERS_TABLE, MASTER_USER, MOCK_FRIENDSHIPS } from "@/feat
 import { mockRequest, MOCK_CONFIG } from "@/shared/utils/mock.utils";
 
 const MOCK_SESSIONS = [
-  { uuid: "session_001", os: "Windows", browser: "Chrome", ip: "192.168.1.45", location: "Madrid, España", isCurrent: true, type: "desktop" },
-  { uuid: "session_002", os: "iOS", browser: "Safari", ip: "185.23.44.12", location: "Barcelona, España", isCurrent: false, type: "mobile" },
+  { uuid: "session_001", os: "Windows", browser: "Chrome", ip: "192.168.1.45", location: "Madrid, España", is_current: true, type: "desktop" },
+  { uuid: "session_002", os: "iOS", browser: "Safari", ip: "185.23.44.12", location: "Barcelona, España", is_current: false, type: "mobile" },
 ];
 
 /**

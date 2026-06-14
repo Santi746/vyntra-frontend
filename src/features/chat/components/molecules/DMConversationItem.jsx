@@ -15,8 +15,9 @@ import { useRouter, useParams } from "next/navigation";
  * @param {Object} props.conversation - Datos de la conversación DM.
  * @param {string} props.conversation.uuid - UUID de la conversación.
  * @param {Object} props.conversation.participant - Datos del otro participante.
- * @param {string} props.conversation.last_message_content - Último mensaje enviado.
- * @param {string} props.conversation.last_message_at - Fecha del último mensaje.
+  * @param {Object} props.conversation.last_message - Último mensaje.
+  * @param {string} props.conversation.last_message.content - Contenido del último mensaje.
+  * @param {string} props.conversation.last_message.created_at - Fecha del último mensaje.
  * @param {number} props.conversation.unread_count - Cantidad de mensajes no leídos.
  */
 export default function DMConversationItem({ conversation }) {
@@ -57,7 +58,7 @@ export default function DMConversationItem({ conversation }) {
           {displayName}
         </span>
         <span className="truncate text-xs text-forest-muted leading-tight max-w-full">
-          {conversation.last_message_content}
+          {conversation.last_message?.content}
         </span>
       </div>
 
